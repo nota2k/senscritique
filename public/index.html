@@ -9,12 +9,23 @@
 <body>
     <div id="data-container" class="container">
         <button id="reload">Actualiser</button>
+        <form id="databaseForm">
+            <label for="username">Contributeur</label>
+            <select id="username">
+                <option value="all">Tous</option>
+                <option value="nota2k">nota2K</option>
+            </select>
+            <label for="year">Date
+             <input type="checkbox" id="year" checked>
+            </label>
+        </form>
         <table>
             <thead>
                 <tr class="head">
                     <th class="titleH">Titre</th>
                     <th class="yearH">Année</th>
                     <th class="creatorH">Realisateur</th>
+                    <th class="contributorH">Contributeur</th>
                     <th>Image</th>
                 </tr>
             </thead>
@@ -24,6 +35,7 @@
         </table>
     </div>
 </body>
-<script lang="javascript" type="module" src="script.js" type="text/javascript"></script>
-<!-- <script lang="javascript" type="module" src="silot.js" type="text/javascript"></script> -->
+<!-- <script lang="javascript" type="module" src="script.js" type="text/javascript"></script> -->
+<script lang="javascript" type="module" src="silot.js" type="text/javascript"></script>
+<!-- <script defer lang="javascript" type="module" src="variables.js" type="text/javascript"></script> -->
 </html>

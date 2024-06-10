@@ -20,11 +20,5 @@
     "express"
   ],
   "author": "",
-  "license": "ISC",
-  "_moduleAliases": {
-    "@root" : ".",
-    "@models": "models",
-    "@controllers": "controllers",
-    "@services": "services"
-  }
+  "license": "ISC"
 }

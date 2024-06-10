@@ -1,9 +1,15 @@
+// import { users } from './variables.js';
+
 console.log('🎬');
 
 // Récupérer les données du json local
 const response = await fetch("output/data.json");
 const films = await response.json();
-console.log(films);
+
+let users = await fetch('output/membres.json');
+users = await users.json();
+
+// console.log(films);
 const allFilms = [...films]
 const objectFilms = [];
 allFilms.forEach(element => {
@@ -12,6 +18,8 @@ allFilms.forEach(element => {
         title: element.title,
         creator: element.creator,
         year: element.year,
+        contributor: element.contributor,
+        thmb : element.thmb,
         cover: element.cover
         }));
 });
@@ -72,42 +80,112 @@ const table = document.querySelector('table');
 let row = document.querySelector('.row');
 let tbody = document.querySelector('tbody');
 
-allFilms.forEach((element,idx) => {
-    idx = idx + 1;
-    const row = document.createElement('tr');
-    const titleCell = document.createElement('td');
-    row.setAttribute('id',`'film-${idx}'`);
-    titleCell.textContent = element.title;
-    titleCell.classList.add('title');
-    row.appendChild(titleCell);
-    
-    const year = document.createElement('td');
-    year.textContent = element.year;
-    year.classList.add('year');
-    row.appendChild(year);
-    
-    const creator = document.createElement('td');
-    creator.textContent = element.creator;
-    creator.classList.add('creator');
-    row.appendChild(creator);
+// Fonction pour créer une promesse pour chaque élément du tableau
+function createElements(element, idx) {
+    return new Promise((resolve, reject) => {
+        idx = idx + 1;
+        const row = document.createElement('tr');
+        const titleCell = document.createElement('td');
+        row.setAttribute('id',`'film-${idx}'`);
+        row.setAttribute('data-contribu',element.contributor);
+        titleCell.textContent = element.title;
+        titleCell.classList.add('title');
+        row.appendChild(titleCell);
+        
+        const year = document.createElement('td');
+        year.textContent = element.year;
+        year.classList.add('year');
+        row.appendChild(year);
+        
+        const creator = document.createElement('td');
+        creator.textContent = element.creator;
+        creator.classList.add('creator');
+        row.appendChild(creator);
 
-    const cover = document.createElement('td');
-    cover.classList.add('cover');
-    row.appendChild(cover);
+        const contributor = document.createElement('td');
+        contributor.textContent = element.contributor;
+        contributor.classList.add('contributor');
+
+        const thmb = document.createElement('td');
+        thmb.classList.add('thmb-wrapper');
+        contributor.appendChild(thmb);
+        const thmbImg = document.createElement('img');
+        thmb.src = element.thmb;
+        thmb.appendChild(thmbImg);
+
+        row.appendChild(contributor);
+
+        const cover = document.createElement('td');
+        cover.classList.add('cover');
+        row.appendChild(cover);
+        
+
+        const imgCover = document.createElement('img');
+        imgCover.src = element.cover;
+        cover.appendChild(imgCover);
+        tbody.appendChild(row);
+        resolve();
+    });
+}
+let select = document.querySelector('select');
+let checkbox = document.querySelector('input[type="checkbox"]');
+
+Promise.all(allFilms.map(createElements)).then(() => {
+        let rows = document.querySelectorAll('tbody tr');
+        
+        select.addEventListener('change', (event) => {
+            Array.from(rows).forEach((row) => {
     
+                    if(row.getAttribute('data-contribu') !== event.target.value && event.target.value !== "all"){
+                        row.style.display = "none";
+                    } else if(row.getAttribute('data-contribu') === event.target.value || event.target.value === "all"){
+                        row.style.display = "flex";
+                    } else {
+                        row.style.display = "flex";
+                    }
+            
+                });
+        });
 
-    const imgCover = document.createElement('img');
-    imgCover.src = element.cover;
-    cover.appendChild(imgCover);
-    tbody.appendChild(row);
+        checkbox.addEventListener('change', (event) => {
+            Array.from(rows).sort(function(a, b) {
+                const aText = a.querySelector('td.year').textContent;
+                const bText = b.querySelector('td.year').textContent;
+                // console.log(aText, bText);
+                if (event.target.checked) {
+                    // console.log(aText, bText);
+                    return  bText - aText;
+                } if(!event.target.checked){
+                    return  aText - bText;
+                } else {
+                    return 0;
+                } 
+            });
+            
+            while (tbody.firstChild) {
+                tbody.removeChild(tbody.firstChild);
+            }
+            Array.from(rows).forEach((row) => {
+                tbody.appendChild(row);
+            });
 
-    // table.appendChild(row);
-
-    
+        });
 });
 
-let tableData = document.querySelectorAll('td');
-tableData.forEach((element,idx) => {
-    // console.log(idx)
+
+
+// Add users in select
+users.forEach((user) => {
+    let option = document.createElement('option');
+    option.textContent = user.username;
+    option.value = user.username;
+    select.appendChild(option);
 });
 
+// Filter Contributors
+    
+    
+    // element.getAttribute('data-contribu');
+let url = new URL(window.location.href);
+let searchParams = new URLSearchParams(url.search);
+// console.log(url);

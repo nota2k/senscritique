@@ -3,7 +3,8 @@ import scrapy
 class SenscritiqueSpider(scrapy.Spider):
     name = "senscritique"
     allowed_domains = ["www.senscritique.com"]
-    start_urls = ["https://www.senscritique.com/nota2k/collection?action=WISH"]
+    user = "nota2k"
+    start_urls = [f"https://www.senscritique.com/{user}/collection?action=WISH"]
     def parse(self, response):
         for index, film in enumerate(response.css('div.sc-7d656c84-1')):
             title = film.css("::text")[1].get()
@@ -12,8 +13,12 @@ class SenscritiqueSpider(scrapy.Spider):
             link = film.css('a::attr(href)').get()
             link = response.urljoin(link)
 
+            current_url = response.url
+            contributor = current_url.split('/')[-2]
+
             yield {
                     'id': str(index),
+                    'contributor': contributor,
                     'title': title,
                     'year': film.css('::text').re(r'\((\d{4})\)'),
                     'creator': film.css('p.ccvcgV a span::text').get(),
