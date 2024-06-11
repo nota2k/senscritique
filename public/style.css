@@ -63,6 +63,7 @@ tr td{
     /*! border-bottom:1px solid black; */
     border-right: 1px solid #b9e189;
     height: fit-content;
+    overflow: hidden;
 }
 
 tr td:nth-child(1),
