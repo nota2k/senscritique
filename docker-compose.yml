@@ -2,12 +2,12 @@ services:
   senscritique_scrap:
     build: .
     volumes:
-      - $PWD/var:/mnt/data
+      - ./var:/mnt/data
 
   nginx:
     image: nginx
     ports:
       - 8080:80
     volumes:
-      - $PWD/public:/usr/share/nginx/html
-      - $PWD/var/senscritique.json:/usr/share/nginx/html/senscritique.json
+      - ./public:/usr/share/nginx/html
+      - ./var/senscritique.json:/usr/share/nginx/html/senscritique.json
