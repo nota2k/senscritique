@@ -16,7 +16,7 @@ NEWSPIDER_MODULE = "senscritique_scrap.spiders"
 FEED_FORMAT = "json"
 
 # Spécifiez le chemin du fichier de sortie
-FEED_URI = "../public/output/data.json"
+FEED_URI = "/mnt/data/senscritique.json"
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = "senscritique_scrap (+http://www.yourdomain.com)"
