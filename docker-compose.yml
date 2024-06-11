@@ -3,6 +3,7 @@ services:
     build: .
     volumes:
       - ./var:/mnt/data
+      - ./senscritique_scrap:/senscritique_app/src/app
 
   nginx:
     image: nginx

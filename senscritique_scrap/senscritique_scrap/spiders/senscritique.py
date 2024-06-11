@@ -18,7 +18,7 @@ class SenscritiqueSpider(scrapy.Spider):
 
             yield {
                     'id': str(index),
-                    'contributor': contributor,
+                    'membre': contributor,
                     'title': title,
                     'year': film.css('::text').re(r'\((\d{4})\)'),
                     'creator': film.css('p.ccvcgV a span::text').get(),
