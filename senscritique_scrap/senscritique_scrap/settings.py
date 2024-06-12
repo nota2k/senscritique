@@ -19,7 +19,7 @@ FEED_FORMAT = "json"
 # FEED_URI = "./../../public/data/%(name)s.json"
 
 FEEDS = {
-   '../public/data/%(name)s.json': {
+   '../data/%(name)s.json': {
         'format': 'json',
         'encoding': 'utf8',
         'overwrite': True
