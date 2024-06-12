@@ -16,7 +16,16 @@ NEWSPIDER_MODULE = "senscritique_scrap.spiders"
 FEED_FORMAT = "json"
 
 # Spécifiez le chemin du fichier de sortie
-FEED_URI = "/mnt/data/senscritique.json"
+# FEED_URI = "./../../public/data/%(name)s.json"
+
+FEEDS = {
+   '../public/data/%(name)s.json': {
+        'format': 'json',
+        'encoding': 'utf8',
+        'overwrite': True
+    }
+}
+
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = "senscritique_scrap (+http://www.yourdomain.com)"
@@ -67,9 +76,9 @@ DEFAULT_REQUEST_HEADERS = {
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-ITEM_PIPELINES = {
-   "senscritique_scrap.pipelines.SenscritiqueScrapPipeline": 300,
-}
+# ITEM_PIPELINES = {
+#    "senscritique_scrap.pipelines.MultiOutputExporter": 300,
+# }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
@@ -94,5 +103,5 @@ ITEM_PIPELINES = {
 
 # Set settings whose default value is deprecated to a future-proof value
 REQUEST_FINGERPRINTER_IMPLEMENTATION = "2.7"
-TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
+# TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 FEED_EXPORT_ENCODING = "utf-8"

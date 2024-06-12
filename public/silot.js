@@ -3,10 +3,11 @@
 console.log('🎬');
 
 // Récupérer les données du json local
-const response = await fetch("output/data.json");
+const response = await fetch("data/senscritique.json");
 const films = await response.json();
+console.log(films);
 
-let users = await fetch('output/membres.json');
+let users = await fetch('data/membres.json');
 users = await users.json();
 
 // console.log(films);
@@ -18,7 +19,7 @@ allFilms.forEach(element => {
         title: element.title,
         creator: element.creator,
         year: element.year,
-        contributor: element.contributor,
+        membre: element.membre,
         thmb : element.thmb,
         cover: element.cover
         }));
@@ -87,7 +88,7 @@ function createElements(element, idx) {
         const row = document.createElement('tr');
         const titleCell = document.createElement('td');
         row.setAttribute('id',`'film-${idx}'`);
-        row.setAttribute('data-contribu',element.contributor);
+        row.setAttribute('data-contribu',element.membre);
         titleCell.textContent = element.title;
         titleCell.classList.add('title');
         row.appendChild(titleCell);
@@ -102,18 +103,18 @@ function createElements(element, idx) {
         creator.classList.add('creator');
         row.appendChild(creator);
 
-        const contributor = document.createElement('td');
-        contributor.textContent = element.contributor;
-        contributor.classList.add('contributor');
+        const membre = document.createElement('td');
+        membre.textContent = element.membre;
+        membre.classList.add('membre');
 
         const thmb = document.createElement('td');
         thmb.classList.add('thmb-wrapper');
-        contributor.appendChild(thmb);
+        membre.appendChild(thmb);
         const thmbImg = document.createElement('img');
         thmb.src = element.thmb;
         thmb.appendChild(thmbImg);
 
-        row.appendChild(contributor);
+        row.appendChild(membre);
 
         const cover = document.createElement('td');
         cover.classList.add('cover');
@@ -182,7 +183,7 @@ users.forEach((user) => {
     select.appendChild(option);
 });
 
-// Filter Contributors
+// Filter membres
     
     
     // element.getAttribute('data-contribu');

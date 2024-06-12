@@ -9,11 +9,19 @@ from scrapy.item import Item, Field
 class SenscritiqueScrapItem(Item):
     # define the fields for your item here like:
     id = Field(),
-    contributor = Field(),
+    membre = Field(),
     title = Field(),
     year = Field(),
     creator = Field(),
     link = Field(),
     cover = Field(),
+
+    pass
+
+class MembresScrapItem(Item):
+    # define the fields for your item here like:
+    username = Field(),
+    link = Field(),
+    thmb = Field()
     
     pass

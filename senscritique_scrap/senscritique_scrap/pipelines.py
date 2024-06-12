@@ -9,6 +9,9 @@ import json
 from itemadapter import ItemAdapter
 from scrapy.exporters import JsonItemExporter
 
+# data = json.loads('../../var/senscritique.json')
+
 class SenscritiqueScrapPipeline:
     def process_item(self, item, spider):
         return item
+        
