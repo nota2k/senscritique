@@ -4,9 +4,16 @@
 # https://docs.scrapy.org/en/latest/topics/items.html
 
 import scrapy
+from scrapy.item import Item, Field
 
-
-class SenscritiqueScrapItem(scrapy.Item):
+class SenscritiqueScrapItem(Item):
     # define the fields for your item here like:
-    # name = scrapy.Field()
+    id = Field(),
+    contributor = Field(),
+    title = Field(),
+    year = Field(),
+    creator = Field(),
+    link = Field(),
+    cover = Field(),
+    
     pass

@@ -5,8 +5,9 @@
 
 
 # useful for handling different item types with a single interface
+import json
 from itemadapter import ItemAdapter
-
+from scrapy.exporters import JsonItemExporter
 
 class SenscritiqueScrapPipeline:
     def process_item(self, item, spider):
