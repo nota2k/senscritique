@@ -2,7 +2,7 @@ services:
   senscritique_scrap:
     build: .
     volumes:
-      - ./var:/mnt/data
+      - ./data:/mnt/data
       - ./senscritique_scrap:/senscritique_app/src/app
 
   nginx:
@@ -11,4 +11,6 @@ services:
       - 8080:80
     volumes:
       - ./public:/usr/share/nginx/html
-      - ./var/senscritique.json:/usr/share/nginx/html/senscritique.json
+      - ./data:/usr/share/nginx/html/data
+      - ./data/senscritique.json:/usr/share/nginx/html/data/senscritique.json
+      - ./data/membres.json:/usr/share/nginx/html/data/membres.json

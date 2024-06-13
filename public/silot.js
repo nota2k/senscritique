@@ -3,11 +3,11 @@
 console.log('🎬');
 
 // Récupérer les données du json local
-const response = await fetch("../data/senscritique.json");
+const response = await fetch("data/senscritique.json");
 const films = await response.json();
 console.log(films);
 
-let users = await fetch('../data/membres.json');
+let users = await fetch("data/membres.json");
 users = await users.json();
 
 // console.log(films);
